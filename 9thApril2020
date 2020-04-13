@@ -1,0 +1,30 @@
+## TASK 1 FOR CREATING MULTIPLE DIRECTORY STRUCTURE:
+mkdir -p a/{b/{d/{i/m/z,j/l/z},e/h/l/z},c/{f/h/l/z,g/k/l/z}} 
+
+## TASK 2 FOR CREATING AN USER AND ALLOWING THE USER TO RUN ONLY THE DATE COMMAND:
+## THE DATE COMMAND IS:
+date
+which date
+chmod a-x /usr/bin/date
+ls -l /usr/bin/date
+useradd -s /usr/bin/date JAYESH
+setfacl -m u:JAYESH:rwx /usr/bin/date
+su - JAYESH
+setfacl -m u:root:--- /usr/bin/date
+chmod -x /usr/bin/date
+date
+
+## TASK 3 TO CREATE TWO USERS AND CREATE A FOLDER AND FILE UNDER THAT AND COPY THE FOLDER AND FILE RESPECTIVELY FROM ONE USER TO THE OTHER:
+## THE SOLUTION IS:
+useradd jayesh 
+mkdir j
+exit
+useradd jayesh2
+mkdir p
+exit
+vim /etc/sudoers
+sudo cp -r /home/jayesh/j /home/jayesh2
+sudo cp -r /home/jayesh2/p /home/jayesh
+
+## TASK 4 RUN CAL COMMAND FOR 10s AND STORE OUTPUT IN /tmp/a.txt:
+watch -n 10 "(cal)|tee -a /tmp/a.txt"
