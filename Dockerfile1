@@ -1,4 +1,4 @@
-from python
+from java
 # it will ckeck  for python image else pull from dockerhub
 maintainer jayeshbudhwani1999@gmail.com,9079320380
 # developer of docker image
