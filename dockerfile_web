@@ -1,0 +1,10 @@
+from nginx
+# i am using a webserver from dockerhub
+maintainer jayeshbudhwani1999@gmail.com
+# creating a maintainer of docker image
+copy webserver /usr/share/nginx/html/
+# copying data from web app folder(not folder only contents) to document root to nignx webserver from where web server read document
+expose 80
+# this will be port of nginx webserver
+
+
