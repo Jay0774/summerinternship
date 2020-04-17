@@ -13,13 +13,37 @@ for num in range(1,101):
 		os.system("docker run -itd --restart unless-stopped --name adhocnw{} java".format(num))
 os.system("docker ps")
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-#Task 2 Store names and created date of all containters in text file
-#text file name is docker_data
+#Task 2 Store names and created date of all containters in text file.
+#text file name is docker_data.
 
 docker ps -a |awk -v FIELDWIDTHS="20 20 20 20 20 20 20" '{ print  $4, $7 }' > docker_data.txt
 cat docker_data.txt
 
-#Task 3 Create custom docker image containing firefox as parent image
-#Dockerfile
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#Task 3 Create custom docker image containing firefox as parent image.
+#Dockerfile create and save without any extension.
+FROM centos:7
+RUN yum install firefox -y
+CMD ["/usr/bin/firefox"]
+#to build this docker file use command
+docker build -t jayeshfirefoximg:v1 .
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# TASK 4 get RAM & CPU consumption from 100 containers and store in text file.
+# shell script for the same
+
+#!/bin/bash
+count=1
+while [ $count -le 100 ]
+do
+    docker container vmstat adhocnw$count >> ramusage.txt
+    ((count++))
+done
+
+# to get the data
+cat ramusage.txt
 
