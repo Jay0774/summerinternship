@@ -1,0 +1,23 @@
+#creating a docker-compose file with two conatiners
+
+version: "3.5" #version of compose
+services:
+ jayeshapp1: #service name
+  image: alpine #images name
+  container_name: jayeshc1 #conatiner name
+  command: ping fb.com #parent process
+ jayeshapp2: #service name
+  image: alpine #images name
+  container_name: jayeshc2 #conatiner name
+  command: ping google.com #parent process
+  
+  #to run the file save it as docker-compose.yml and run by using
+  docker-compose up
+  
+  #to chech the details of containers use
+  docker-compose ps
+  
+  #to stop the container fully use
+  docker-compose down
+  
+ 
