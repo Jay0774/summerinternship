@@ -1,3 +1,4 @@
+# contents of docker file
 from python
 # it will ckeck  for python image else pull from dockerhub
 maintainer jayeshbudhwani1999@gmail.com,9079320380
@@ -8,4 +9,12 @@ copy hello.py /mycode/hello.py
 # it will copy code from local system to docker image
 cmd python /mycode/hello.py
 # so this will run this code as default parent proccess
+
+# use contents of docker file to create a docker file with name dockerfile
+
+# paste the program hello.py and the dockerfile to a new folder
+
+# use command to create an image
+docker build -t <img_name> .
+
 
