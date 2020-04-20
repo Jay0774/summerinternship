@@ -1,0 +1,22 @@
+# contents of docker file
+from java
+maintainer jayeshbudhwani1999@gmail.com
+env classname=first
+# optioal and will be used for future
+run mkdir/code
+add first.java /code/first.java
+workdir /code/
+# to compile java file
+run javac first.java
+cmd java first
+
+# use contents of docker file to create a docker file with name dockerfile
+
+# paste the program first.java and the dockerfile to a new folder
+
+# use command to create an image
+docker build -t <img_name> .
+
+
+
+
