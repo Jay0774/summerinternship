@@ -1,0 +1,22 @@
+# contents of docker-compose.yml
+version: "3.5"
+services:
+ app1:
+  image:jayesh:day12i1 #
+  build: #location of dockerfile
+   context: #location of dockerfile
+   dockerfile: #name of dockerfile
+  containername: jayeshc1
+  ports:
+   - "4444:80"
+  networks:
+   - jayeshbr111 #iwant to use this bridge but this is not present as of now
+  volumes:
+   - jayeshvol1:/mnt/google   # attaching images
+   
+networks:
+ jayeshbr111: #this will create a new docker network
+volumes:
+ jayeshvol1:  #this will create a new volume  
+  
+  
