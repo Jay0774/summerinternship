@@ -1,0 +1,15 @@
+# to create a volume
+
+docker volume create vol_name
+
+# to check volume is created or not 
+
+docker volume ls
+
+# to attach a volume to a container
+
+docker run -itd --name container_name -v volume_name:/foldername imgname:version
+
+# to attach a particular folder to volume
+
+docker run -itd --name container_name -v colume_name source_folder:/target_folder imgname:version
