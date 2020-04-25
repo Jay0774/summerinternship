@@ -10,5 +10,6 @@ from alpine
 maintainer jayeshbudh@gmail.com
 entrypoint cal
 
-# to build the containers use command
-docker build -t containername:version .
+# to build the containers use commands
+docker build -t imgname:version .
+docker run -itd --name containername imgname:version
