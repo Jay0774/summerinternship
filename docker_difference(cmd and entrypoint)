@@ -1,0 +1,14 @@
+# creating the dockerfiles and saving them with name dockerfile no extension
+
+# first one using cmd in this without any command cal will run , with command the command will run.
+from alpine
+maintainer jayeshbudh@gmail.com
+cmd cal
+
+# second one using entrypoint in this without any command cal will run , with command also cal will run.
+from alpine
+maintainer jayeshbudh@gmail.com
+entrypoint cal
+
+# to build the containers use command
+docker build -t containername:version .
