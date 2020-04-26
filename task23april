@@ -1,0 +1,10 @@
+# Assignment 1 : to create a docker compose file of mysql and django which saves data from django to mysql 
+
+# Assignment 2 : to create a docker container inside a container
+# By using the following command a container of docker will be created and its script will run in which more containers can be created 
+
+docker run -it --name jayeshdocker -v /var/run/docker.sock:/var/run/docker.sock docker sh
+docker run -it --name jayeshalpine alpine sh
+
+# Assignment 3 : to create a docker image of nginx which updates the conatiner by deleting previous container
+# Assignment 4 : to create a docker image of nginx in which default user is noot root
