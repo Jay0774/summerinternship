@@ -1,0 +1,10 @@
+# to create a jenkins container first use the command provided this set is required to get jenkins
+docker run -p 8080:8080 -p 50000:50000 jenkins
+
+# to create a container use command to set another volume for jenkins
+docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins
+
+# to start jenkins use the port as
+https://127.0.0.1:8080
+
+# then login to jenkins
