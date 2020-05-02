@@ -1,10 +1,33 @@
 # Assignment 1 : to create a docker compose file of mysql and django which saves data from django to mysql 
 
+--- yet to be done ------
+
+
 # Assignment 2 : to create a docker container inside a container
-# By using the following command a container of docker will be created and its script will run in which more containers can be created 
+  # using the following command-
+    docker run -ti -v /var/run/docker.sock:/var/run/docker.sock docker
+                                      OR
+                                      
+  # By using the following command a container of docker will be created and its script will run in which more containers can be created                                       
+    docker run -it --name jayeshdocker -v /var/run/docker.sock:/var/run/docker.sock docker sh
+    docker run -it --name jayeshalpine alpine sh
 
-docker run -it --name jayeshdocker -v /var/run/docker.sock:/var/run/docker.sock docker sh
-docker run -it --name jayeshalpine alpine sh
+# Assignment 3 : to create a docker image which updates the conatiner by deleting previous container
 
-# Assignment 3 : to create a docker image of nginx which updates the conatiner by deleting previous container
-# Assignment 4 : to create a docker image of nginx in which default user is noot root
+docker run -d \
+ --name jayesh \
+ -v /var/run/docker.sock:/var/run/docker.sock \
+ nginx
+
+# Assignment 4 : to create a docker image of nginx in which default user is not root
+# dockerfile
+-FROM ubuntu
+-MAINTAINER jayeshbudhwani1999@gmail.com
+-RUN apt-get install sudo
+-RUN adduser --disabled-password --gecos '' jayesh
+-RUN adduser jayesh sudo
+-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+-USER jayesh
+-RUN sudo apt-get update 
+
+# create a image and use whoami
