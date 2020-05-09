@@ -1,0 +1,37 @@
+# if you want to play with ansible ust use a docker file to create its image and play with it.
+
+# dockerfile
+
+-from centos
+-maintainer jayeshbudhwani1999@gmail.com
+-run yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+-# download repo of EPEL
+-run yum install ansible -y
+
+# use build command to build an image.
+
+docker build -t ansible:<name> .
+
+# now create a container from above image
+
+docker run -it --name img1 ansible:<name> bash
+
+# in the script use the command to get into ansible folder
+
+cd /etc/ansible/
+
+# now to test ansible create a small playbook file in another directory as test.yml
+---
+ - hosts: localhost
+   tasks:
+    - name: running date command
+      command: date
+      register: x
+    - name: print value of x
+      debug: var=x
+    - name: print value of x with stdout
+      debug: var=x.stdout
+
+# now rum the file.
+
+ansible-playbook test.yml
