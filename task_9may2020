@@ -1,0 +1,44 @@
+# first create a docker file with the following contents
+
+from centos
+maintainer jayeshbudhwani1999@gmail.com
+run yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+# download repo of EPEL
+run yum config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+run yum install docker-ce --nobest -y
+run yum install ansible -y
+
+# after the docker file is created create a image as
+
+docker build -t ansibledocker .
+
+# Running Docker Container
+
+docker run -it --name cont1 -v /var/run/docker.sock:/var/run/docker.sock ansiblecontainer bash
+
+# after this create a playbook as assignment.yml
+---
+ - hosts: localhost
+   tasks:
+    - name: Pulling Alpine Image
+      shell: docker pull alpine
+    - name: Running Containers
+      shell: sh script.sh
+      
+# run the above playbook as
+
+ansible-playbook assignment.yml
+
+# contents of scripy.sh
+
+#!/bin/bash
+for i in {1..10}
+do
+    docker run -itd --name img$i alpine ping fb.com
+done
+
+# check images by 
+
+docker ps -a
+
+
