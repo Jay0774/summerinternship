@@ -17,3 +17,7 @@ kubectl create -f <filename>
 # to check the status of pod
 
 kubectl get pods
+
+# to delete the pod use 
+
+kubectl delete pods <name>
