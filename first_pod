@@ -20,4 +20,4 @@ kubectl get pods
 
 # to delete the pod use 
 
-kubectl delete pods <name>
+kubectl delete pods <filename>
