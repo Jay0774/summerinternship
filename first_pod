@@ -1,0 +1,19 @@
+# create a yml file as jayeshfirst.yml
+
+# provide the following contents with proper indentation..
+
+apiversion: v1
+kind: Pod                 # p should be capital/uppercase
+metadata: jayeshpod1      # name of the container   
+spec:                     # to provide specification
+ container:               # about docker image and its is information
+  - name: jayeshc1        # name of container
+    image: alpine         # name of image
+    
+# creating a pod
+
+kubectl create -f <filename>
+
+# to check the status of pod
+
+kubectl get pods
