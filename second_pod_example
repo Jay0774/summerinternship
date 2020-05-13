@@ -1,0 +1,54 @@
+# use the provided yml file to create a kube
+
+apiVersion: v1
+kind: Pod
+metadata:
+ name: jayeshc2
+spec:
+ containers: 
+  - name: jayesh
+    image: nginx
+    ports:
+     - containerPort: 80 # same as expose in dockerfile 
+     
+# to run use the command      
+
+kubectl create -f second.yml
+
+# to update a already running container use command , update will only occur on some fields
+ 
+kubectl apply -f second.yml 
+
+# to get the details of clusters use commands
+
+1. kubectl get pods -o wide (to get full details)
+2. kubectl get pods (to get important fields)
+3. kubectl get pods -w (to watch the creation)
+4. kubectl describe pods jayeshpod2 (to describe the pod)
+5. kubectl explain pods (to get the explainaton about pods)
+
+# to create a pod using kubectl , use run command and store the output in a file
+
+kubectl run jayeshpod4 --image=nginx --restart Never -o yaml > third.yml
+
+# the contents of third.yml are
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: jayeshpod5
+  name: jayeshpod5
+spec:
+  containers:
+  - image: nginx
+    name: jayeshpod5
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}
+
+# finally to delete a pod use command
+
+kubectl delete pods <pod_name>
