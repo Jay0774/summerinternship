@@ -2,7 +2,7 @@
 
 # provide the following contents with proper indentation..
 
-apiversion: v1
+apiVersion: v1            # V of version should be uppercase
 kind: Pod                 # p should be capital/uppercase
 metadata: jayeshpod1      # name of the container   
 spec:                     # to provide specification
