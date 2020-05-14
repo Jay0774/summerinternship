@@ -1,9 +1,9 @@
-# use the provided yml file to create a kube
+# use the provided yml file to create a pod file
 
 apiVersion: v1
 kind: Pod
 metadata:
- name: jayeshc2
+ name: jayeshpod2
 spec:
  containers: 
   - name: jayesh
