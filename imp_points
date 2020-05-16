@@ -1,0 +1,18 @@
+There are 5 ways by which we can create pods:
+
+1. using yaml
+2. using json
+3. using api
+4. using run option of kubectl
+5. using program
+
+There are 4 types of services:
+
+1. clusterip
+2. nodeport                     # access outside kube cluster
+3. loadbalancer                 # access outside kube cluster
+4. External name
+
+Both service ip and pod ip is not rechable.
+
+User can access master ip (not followed) or worker ip. 
