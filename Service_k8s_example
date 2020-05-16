@@ -1,0 +1,46 @@
+# create a pod using the command 
+
+kubectl run pod1 --image=nginx --port 80 --restart Never -o yaml > pod1.yml
+
+# open the file and under label add anothe as x: hello
+
+# now create a service file as pod1service.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+ name: myservice1
+spec:
+ ports: 
+  - name: mysvcport
+    port: 4455 
+    targetPort: 80
+ selector:
+  run: pod1 
+ type: NodePort                   # type od service
+ 
+ # now run the service
+ 
+ kubectl create -f pod1service.yml
+ 
+ # to check the service
+ 
+ kubectl get service
+ 
+ # to open the conatiner on vm or virtualbox use
+ 
+ localhost:<portno>
+ 
+ # to open the conatiner on docker use
+ 
+ <docker_ip>:<portno>
+ 
+ # to create a service directly use
+ 
+ kubectl create myservice1 --tcp 80 --dry-run -o yaml > myserv1.yml
+ 
+ 
+
+
+ 
+ 
