@@ -49,3 +49,7 @@ status:
 # to create a service file from pod file you can also use the command
 
 kubectl expose pods jayeshpod1 --type NodePort --port 80
+
+# to get the details about a pod you have not created use the command
+
+kubectl get pod/service <pod/service name> --export -o yaml
