@@ -1,0 +1,39 @@
+# To create a replication controller we need to cretae a pod file as myrcapp1.yml
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+ name: myrcapp1
+ labels:
+  app: web1                 # this is the label of rc not label of pods
+spec:
+ replicas: 1                # always one pod will be present even in case of current worker node failure
+ template: 
+  metadata: 
+   name: mypod11            # name of pod created by rc
+   labels:
+    x: hello
+  spec:
+   containers:
+    - name: jayeshc1
+      image: alpine
+      command: ["bin/sh","-c","ping fb.com"]
+      
+ 
+ # now to create a pod 
+ 
+ kubectl create -f myrcapp1.yml
+ 
+ # to check the pod and rc use
+ 
+ kubectl get pods,rc
+ 
+ # to check the output of pod use command
+ 
+ kubectl logs <podname>
+ 
+ # now finally to create a service of created pod use command 
+ 
+ kubectl expose <podname>OR<rcname> --type NodePort --port 80
+                        OR
+ kubectl expose <podname>OR<rcname> --type LoadBalancer --port 80
