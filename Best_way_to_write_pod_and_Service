@@ -1,0 +1,51 @@
+# to know the best way to create a pod and service file use the following commands
+
+1. kubectl run jayeshpod1 --image=nginx --port 80 --dry-run -o yaml > jayayeshpod1.yml
+
+2. kubectl create service nodeport jayeshservice1 --tcp 80 --dry-run -o yaml >> jayeshpod1.yml
+
+# contents of jayeshpod1.yml file
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: jayeshpod1
+  name: jayeshpod1
+spec:
+  containers:
+  - image: nginx
+    name: jayeshpod1
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+---                                                    # required to create a seperation
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:                         # label of service
+    app: jayeshservice1
+  name: jayeshservice1            # name of service
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    protocol: TCP
+    targetPort: 80                # target port where pod is running
+  selector:
+    app: jayeshpod1
+  type: NodePort
+status:
+  loadBalancer: {}
+  
+  
+  
+# to create a service file from pod file you can also use the command
+
+kubectl expose pods jayeshpod1 --type NodePort --port 80
