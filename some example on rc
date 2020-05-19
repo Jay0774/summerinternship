@@ -1,0 +1,13 @@
+# To create more pods we have 3 methods:
+
+1. use file method i.e change in file and use command.
+
+kubectl apply -f <rcfilename>
+
+2. use scale command mostly used.
+
+kubectl scale  rc <rcfilename> --replicas=<no. of pods>
+
+3. use edit command (not recommended)
+
+kubectl edit rc <rcfilename>
