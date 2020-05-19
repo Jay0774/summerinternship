@@ -1,0 +1,32 @@
+# cretae a yml file as myfirstrs.yml with the following contents
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+ name: myrsapp1
+ labels:
+  app: web1                 # this is the label of rc not label of pods
+spec:
+ selector: 
+  matchLabels:
+   x: hellors               # same label as of pod 
+ replicas: 3                # always one pod will be present even in case of current worker node failure
+ template: 
+  metadata: 
+   name: mypodrs11          # name of pod created by rc
+   labels:
+    x: hellors
+  spec:
+   containers:
+    - name: jayeshc1
+      image: alpine
+      command: ["bin/sh","-c","ping fb.com"]
+      
+ # run replca set as 
+ 
+ kubectl create -f <appname>
+ 
+ # for checking the pods and rs
+ 
+ kubectl get rs,po
+ 
