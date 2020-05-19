@@ -1,0 +1,32 @@
+# To create a volume use volumes keyword and volumeMounts keyword under spec as shown create a yml file..
+
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2020-05-19T13:11:07Z"
+  labels:
+    x: hello                                         # another label as pods can have multiple labels       
+    run: jayeshpod1                                  # original label of pod
+  name: jayeshpod1
+spec:
+  volumes:                                            # this id for creating volumes of any type    
+  - name: jayeshvolume1                               # name of volume           
+    emptyDir: {}                                      # this will create a temp folder in worker pod and if pod is deleted it is also delted
+  containers:
+  - image: alpine
+    name: jayeshpod1
+    volumeMounts:
+    - name: jayeshvolume1                             # same as volume name provided
+      mountPath: /mnt/data
+    command: ["bin/sh","-c","while true ; do date >> /mnt/data/output.txt ; sleep 2 ; done"]                # command that is running
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status:
+  phase: Pending
+  qosClass: BestEffort
+  
+# to check the file use commands
+
+kubectl exec -it jayeshpod1 sh
+cd mnt/data/
+cat output.txt
