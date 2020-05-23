@@ -1,0 +1,44 @@
+# Check the available namespaces use command
+ 
+ kubectl get namespace
+                    
+# To get the pods running in a namespace use command
+
+ kubectl get pods -n <namespace_name>
+
+# To create a a name space use command
+
+ kubectl create namespace <namespace_name>
+ 
+# To create a pod inside a particular namespace use command
+
+ kubectl run pod1 --image=nginx --port 80 -n <namespace_name> --dry-run=client -o yaml > pod1.yml
+ kubectl create -f pod1.yml -n <namespace_name>
+ 
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# create a pod as pod1.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: jayesh
+  creationTimestamp: null
+  labels:
+    run: namespace1
+  name: namespace1
+spec:
+  containers:
+  - image: nginx
+    name: namespace1
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+# then create the pod as
+
+kubectl create -f pod1.yml
+
