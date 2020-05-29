@@ -1,0 +1,80 @@
+# first create the docker file as for just fun :
+
+# dockerfile1.txt
+FROM nginx
+COPY V1.HTML /usr/share/nginx/html/index.html
+
+# dockerfile2.txt
+FROM nginx
+COPY V2.HTML /usr/share/nginx/html/index.html
+
+# v1.html and v2.html can be your required html pages
+
+# then create the docker image and push it on docker hub
+
+ docker build -t jayeshbudhwani1999/dep_example:v1 -f dockerfile1.txt .
+ docker build -t jayeshbudhwani1999/dep_example:v2 -f dockerfile2.txt .
+ 
+ docker push jayeshbudhwani1999/dep_eample:v1
+ docker push jayeshbudhwani1999/dep_eample:v2
+ 
+# now create the podfile as dep1.yml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: jayeshdep1
+  name: jayeshdep1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jayeshdep1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: jayeshdep1
+    spec:
+      containers:
+      - image: jayeshbudhwani1999/dep_example:v2
+        name: dep-example-qr299
+        resources: {}
+status: {}
+
+                             OR
+                             
+kubectl create deployment jayeshdep1 --image=jayeshbudhwani1999/dep_example:v1 --dry-run=client -o yaml > dep1.yml                             
+
+# now create the deployment as
+
+kubectl create -f dep1.yml
+
+# then create the service as 
+
+kubectl expose deployments jayeshdep1 --type NodePort --port 80
+
+# to apply changes use command apply after changing the version of dockerimage in dep1.yml file
+
+kubectl apply -f dep1.yml
+
+# to check the details of deployment yse command
+
+kubectl describe deployment <name>
+
+# to check the revision no. of deployment use command 
+
+kubectl rollout history deployment jayeshdep1
+
+# to ckeck or got to an previous version use command
+
+kubectl rollout history deployment jayeshdep1
+
+# to go to a particular version use command
+
+kubectl rollout history deployment jayeshdep1 --to-revision=<required_number>
+
+
