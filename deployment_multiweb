@@ -1,0 +1,51 @@
+# create a pod file as depmweb.yml as:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: depmweb
+    x: hello
+  name: depmweb
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: depmweb
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: depmweb
+    spec:
+      volumes:
+      - name: jayeshvol1
+        emptyDir: {}
+      containers:
+      - image: jayeshbudhwani1999/may2020q1:v1
+        name: may2020q1
+        env:
+        - name: x
+          value: app2
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: jayeshvol1
+          mountPath: /mnt/data
+        resources: {}
+status: {}
+
+
+# create the app as:
+
+kubectl create -f depmweb.yml
+
+# then create a service as:
+
+kubectl expose deployment depmweb --type LoadBalancer --port 80
+
+# to check the resources use command:
+
+kubectl get pods,deploy,svc
