@@ -1,0 +1,53 @@
+# To use congig map as volume first create a configmap as
+
+kubectl create configmap jayeshc2 --from-file index.HTML
+
+# contents of index.html
+
+<h1>HELLO THIS IS EXAMPLE APP USED FOR CONFIG MAP </h1>
+<p>
+NAME:<br> <input type="text">
+</p>
+<p>
+CLASS:<br> <input type="text">
+</p>
+
+# create a podfile as 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    x: hello
+    run: nginxpod
+  name: nginxpod
+spec:
+  volumes:
+  - name: jayeshvol
+    configMap:                   # volume from configmap
+     name: jayeshc2              # contents of configmap stored in html folder inside nginx
+  containers:
+  - image: nginx
+    name: nginxpod
+    volumeMounts:
+    - name: jayeshvol
+      mountPath: /usr/share/nginx/html/
+    ports:
+    - containerPort: 80
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+# create the pod and service as
+
+kubectl create -f k8sc2.yml
+
+kubectl expose pod nginxpod --type NodePort --port 80
+
+# to check inside pod use command
+
+kubectl exec -it nginxpod bash
+cat /usr/share/nginx/html/index.html
+
+
