@@ -1,0 +1,45 @@
+# To create a configmap use command
+
+kubectl create configmap jayeshc1 --from-literal x=app2
+
+# create a podfile as
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    adhoc: jayesh
+    run: pod
+  name: pod
+spec:
+  containers:
+  - image: jayeshbudhwani1999/may2020q1:v1
+    name: pod
+    ports:
+    - containerPort: 80
+    env:
+    - name: x                                    # env variable name defined in docker file
+      valueFrom:
+       configMapKeyRef:
+        name: jayeshc1                          # name of configmap file 
+        key: x                                  # key that is stored in configmap file
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+# create the pod as
+
+kubectl create -f k8c.yml
+
+# to check the created resources then use command
+
+kubectl get cm,pods
+
+# then check for env variable inside pod as
+
+kubectl exec -it pod env
+
+# to create a service use command
+
+kubectl expose pods pod --type NodePort --port 80
