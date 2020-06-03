@@ -1,0 +1,36 @@
+# to use a database in a pod / database image use a pod file as:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    adhoc: jayesh
+    run: pod1
+  name: pod1
+spec:
+  containers:
+  - image: mysql:latest
+    name: pod1
+    ports:
+    - containerPort: 3306
+    env:
+    - name: MYSQL_ROOT_PASSWORD                                # environment variable
+      value: test                                              # value of password
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+
+# then create the pod as:
+
+kubectl create -f db.yml
+
+# then go to pod to access database as:
+
+kubectl exec -it pod1 bash
+
+# then use the following commands to create a databse "hello_k8s":
+
+- mysql -u root -ptest
+- show databases;
+- create database hello_k8s;
