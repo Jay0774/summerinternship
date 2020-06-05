@@ -1,0 +1,36 @@
+# A Container can exceed its memory request if the Node has memory available.
+# But a Container is not allowed to use more than its memory limit.
+# If a Container allocates more memory than its limit, the Container becomes a candidate for termination.
+# If the Container continues to consume memory beyond its limit, the Container is terminated.
+# If a terminated Container can be restarted, the kubelet restarts it, as with any other type of runtime failure.
+
+# create the pod file as exceed.yml:
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memory-demo-2
+  namespace: mem-example
+spec:
+  containers:
+  - name: memory-demo-2-ctr
+    image: polinux/stress
+    resources:
+      requests:
+        memory: "50Mi"
+      limits:
+        memory: "100Mi"
+    command: ["stress"]
+    args: ["--vm", "1", "--vm-bytes", "250M", "--vm-hang", "1"]
+    
+# create the resource as:
+
+kubectl create -f exceed.yml
+
+# to ckeck the status of presource use command:
+
+kubectl get pods
+
+# if its not running the see inside the pod as:
+
+kubectl get pod <pod_name> --output=yaml
