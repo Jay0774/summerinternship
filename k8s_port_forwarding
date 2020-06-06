@@ -1,0 +1,27 @@
+# TO access an pod without using service can use port-forward command as:
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# first create a pod as 
+
+kubectl create pod nginxpod --image=nginx --port 80
+
+# then create a service as:
+
+kubectl expose pod nginxpod --type NodePort --port 80
+
+# then access using the port provided by service 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# or forward the port using the port-forward command as:
+
+kubectl port-forward <pod_name> <local_port>:<target_port>
+
+kubectl port-forward nginxpod 80:4455
+
+# then it will show like this
+
+I0710 14:43:38.274550    3655 portforward.go:225] Forwarding from 127.0.0.1:80 -> 4455
+
+then check the ip  127.0.0.1:4455
