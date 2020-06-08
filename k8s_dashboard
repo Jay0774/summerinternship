@@ -1,0 +1,17 @@
+# use the following command to create a dashboard
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+
+# To get the resources created use command
+
+kubectl get sa,secret,service,pods -n kubernetes-dashboard
+
+# Then edit the service file to access the pod outside
+
+kubectl edit service kubernetes-dashboard -n kubernetes-dashboard
+
+# then use token to enter into dashboard
+
+kubectl describe secret kubernetes-dashboard-token-vvg6z -n kubernetes-dashboard
+
+# then paste the token
