@@ -1,0 +1,12 @@
+# To get the serviceaccounts information use command
+
+kubectl get serviceaccounts
+
+# To get the secret of sa use command
+
+kubectl get secrets -n <namespace_name>
+
+# To get the token use command
+
+kubectl describe secrets <name> -n <namespace_name>
+
