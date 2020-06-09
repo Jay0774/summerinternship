@@ -1,0 +1,29 @@
+# To create a pv file you cannot use --dry-run.
+
+# To create a pv create a file as pv1.yml
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv1
+spec:
+  capacity:
+    storage: 5Gi                                            # size / storage capacity (1 Gib = 1024 Mib) (1 GB  = 1000 MB)
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce                                         # only one worker node can access and can only read and write
+  persistentVolumeReclaimPolicy: Recycle                    # pv will not be free but can be recycled
+  storageClassName: slow                                    # type of storage 
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:                                                      # source 
+    path: /tmp                                              # path that you have created 
+    server: 172.17.0.2                                      # ip of the server
+    
+    
+# To create the pv and get the created pv use command
+
+kubectl create -f pv1.yml
+kubectl get pv
+
