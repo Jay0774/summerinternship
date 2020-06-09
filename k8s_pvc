@@ -1,0 +1,20 @@
+# To create a pvc use a file pvc1.yml
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myclaim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: slow
+  
+# To create a pvc use a namespace as:
+
+kubectl create -f pvc1.yml -n <namespace_name>
+
+# Then you can create a pod and use the pvc as volume in pod.
