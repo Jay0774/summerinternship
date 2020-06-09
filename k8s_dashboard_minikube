@@ -1,0 +1,9 @@
+# For minikube the dashboard in used as addons.
+
+# For viewing the addons of minikube use command
+
+minikube addons list
+
+# To deploy a dashboard use command
+
+minikube DashBoard
