@@ -1,0 +1,25 @@
+# create the file as
+
+apiVersion: rbac.authorization.k8s.io/v1                  # This role binding allows "jayesh" to read secrets in the "development" namespace.
+                                                          # You need to already have a Role named "jayeshrole1".
+kind: RoleBinding
+metadata:
+  name: read-secrets
+  namespace: limited
+subjects:
+- kind: User
+  name: jayesh                                              # Name is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: jayeshrole1
+  apiGroup: rbac.authorization.k8s.io
+  
+  
+  # create a resource as
+  
+  kubectl create -f rolebinding.yml
+  
+  
+  
+  
