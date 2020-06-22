@@ -1,0 +1,21 @@
+# first create a namespace
+
+kubectl create namespace limited
+
+# then create a role file as
+
+apiVersion: rbac.authorization.k8s.io/v1        # name of version
+kind: Role
+metadata:
+  name: jayeshrole1
+  namespace: limited
+rules:
+- apiGroups: [""]                                # all api gropus included
+  resources: ["pods", "pods/log"]                # only pods and pod/log are allowed
+  verbs: ["get", "list"]
+  
+  # create the resource as
+  
+  kubectl apply -f role.yml
+  
+  
